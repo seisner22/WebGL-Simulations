@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+<!-- TURING MODEL                             				            -->
+<!--                                                                    -->
+<!-- PROGRAMMER     :   ABOUZAR KABOUDIAN, SHAUN EISNER                 -->
+<!-- DATE           :   Fri 21 Jul 2017 09:48:16 AM EDT                 -->
+<!-- PLACE          :   ATLANTA, GA, USA                                -->
+<!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+<html>
+<head>
+<title>Turing Model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- Styles for Stats library                                           -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<style>
+#stats { position: fixed; top:0; left: 0 }
+#stats #fps { background: transparent !important }
+#stats #fps #fpsText { color: #aaa !important }
+#stats #fps #fpsGraph { display: none }
+
+h1{
+	counter-reset: h2;
+	text-align:left;
+	color: white;
+       	background-color: #00254c;
+       	padding-left: 20px ;
+       	padding-top: 5px ;
+       	padding-bottom: 5px ;
+       	border-radius: 10px;
+}
+
+h2 {
+    	counter-reset:h3 ;
+    	color: #00254c;
+    	background-color: #e5e5e5 ;
+    	padding-left: 20px ;
+    	padding-top: 2.5px ;
+    	padding-bottom: 2.5px ;
+
+    	border-radius: 10px;
+}
+
+h3 {
+    	counter-reset:h4 ;
+    	color: #00254c;
+    	background-color: #f0f0f0 ;
+    	padding-left: 20px ;
+    	padding-top: 2.5px ;
+    	padding-bottom: 2.5px ;
+    	border-radius: 10px;
+}
+
+h4 {
+    	counter-reset: h5
+    	color: #00254c;
+    	background-color: #fafafa ;
+    	padding-left: 20px ;
+    	padding-top: 2.5px ;
+    	padding-bottom: 2.5px ;
+    	border-radius: 10px;
+}
+
+p{
+    max-width : 700px  ;
+    padding-left: 10px ;
+}
+canvas.clickable:hover{
+    cursor:pointer ;
+    cursor:hand ;
+}
+
+.footer{
+    position : fixed ;
+    left : 0px ;
+    width : 100% ;
+    background-color: #fafafa;
+    color:black ;
+    bottom: 0px ;
+    text-align : left ;
+    font: 'italic 12pt Times' ;
+}
+
+</style>
+
+<!--    MathJax is used to show equations!
+            The following section sets up the MathJax environment.  -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      displayAlign: "left",
+      TeX :{
+        style: {
+            "padding": "10px 20px",
+        }
+
+      }
+    });
+    </script>
+    <!--    The following line imports the MathJax library          -->
+    <script
+        type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML">
+    </script>
+    <!-- including AkPlot.js for plotting purposes. -->
+    <script src='libs/AkPlot.js'></script>
+
+<script src='libs/stats.js'></script>
+<script src='config.js'></script>
+<script data-main="app/main" src="libs/require.js"></script>
+
+<!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+<!--                    MAIN BODY OF THE HTML                           -->
+<!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+</head>
+<body id='main-body'>
+<h1>The Turing Model</h1>
+<canvas id="canvas_1" width="500" height="500" style="border:1px solid #000000;" >
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+<canvas id="canvas_2" width="500" height="500" style="border:1px solid #000000;" >
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+<!--
+<canvas id="canvas_3" width="512" height="512" style="border:1px solid #000000;" >
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+-->
+<p>In this program, we are using a Turing Model which follows the governing equations below.</p>
+<p>
+    \[
+			\frac{dX_r}{dt}= f(X_r, Y_r) + \mu_x \nabla^2 X_r \,  \textrm{,} \quad \quad f(X_r, Y_r) = aX_r + bY_r
+    \]
+
+    \[
+			\frac{dY_r}{dt}= g(X_r, Y_r) + \mu_y\nabla^2 Y_r \, \textrm{,} \quad \quad g(X_r, Y_r) = cX_r + dY_r
+	  \]
+
+</p>
+<p>where $X_r$ and $Y_r$ are the state variables, and the rest of the variables determine the dynamics of the system and are determined through the graphical user interface.</p>
+<p>The first canvas shows the colorplot of the $X_r$ variable over the domain while the next canvas shows the nullclines and the trajectory of a single cell for 10 seconds starting from the click values set through the graphical user interface.</p>
+
+<p>You can click on the nullcline plot to choose the initial conidtion. Using the same initial condition, you can also click on the color plot to purturb the solution and see the effects. Through the graphical interface, you can choose whether you intend to purturb both $X_r$ and $Y_r$ variable or just one of them.</p>
+<p>Reference: </p>
+<p> <a href='https://link.springer.com/content/pdf/10.1007%2FBF02459572.pdf'> "The chemical basis of morphogenesis"</a></p>
+<br>
+<br>
+<br>
+<div class=footer>
+<p>Programmed by: Abouzar Kaboudian, Shaun Eisner</p>
+<p>email: <a href='mailto:abouzar@gatech.edu'>abouzar@gatech.edu</a></p>
+<p>email: <a href='mailto:seisner6@gatech.edu'>seisner6@gatech.edu</a></p>
+
+</div>
+
+</body>
+</html>
